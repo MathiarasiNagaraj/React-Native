@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
-const ImageDetail = ({imgSrc, title}) => {
+import {View, Image, StyleSheet, Text} from 'react-native';
+
+const ImageDetail = ({ imgSrc, title}) => {
   return (
     <View style={styles.container}>
       <Text>{title}</Text>
@@ -11,6 +12,7 @@ const ImageDetail = ({imgSrc, title}) => {
 
 const styles = StyleSheet.create({
   container: {
+    margin: 60,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
