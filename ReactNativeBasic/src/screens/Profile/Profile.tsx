@@ -1,16 +1,17 @@
 import React from 'react';
 import {SafeAreaView, FlatList, StyleSheet, Button} from 'react-native';
 import {TOPIC_DATA} from '../../constants/commonConstants';
-const Profile = ({navigation, route}) => {
-  const Lists = <FlatList />;
+const Profile = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={TOPIC_DATA}
         renderItem={({item}) => (
-            <Button style={styles.btn} title={item.title}
+          <Button
+            style={styles.btn}
+            title={item.title}
             onPress={() => navigation.navigate(item.component)}
-            />
+          />
         )}
         keyExtractor={item => item.id}
       />
