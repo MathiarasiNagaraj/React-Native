@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, FlatList, StyleSheet, Button} from 'react-native';
+import {SafeAreaView, FlatList, StyleSheet, Button} from 'react-native';
 import {TOPIC_DATA} from '../../constants/commonConstants';
 const Profile = ({navigation, route}) => {
   const Lists = <FlatList />;
