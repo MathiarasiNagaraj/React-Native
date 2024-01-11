@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     height: 500,
     overflow: 'scroll',
-    backgroundColor: 'yellow',
+    backgroundColor: 'white',
   },
   star: {
     width: 50,
