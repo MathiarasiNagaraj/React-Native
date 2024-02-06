@@ -6,10 +6,10 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.Text}> Let's Learn React Native </Text>
-      <ImageDetail
+      {/* <ImageDetail
         imgSrc={require('../../../assets/images/reactnative.png')}
         title={''}
-      />
+      /> */}
       <Button
         title="Start"
         style={styles.button}

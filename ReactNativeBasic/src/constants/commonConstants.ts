@@ -14,4 +14,9 @@ export const TOPIC_DATA = [
       title: 'Third Item',
         component:'ColorBox'
   },
+  {
+    id: 4,
+    title: 'Animation',
+    component:'Animation'
+  }
 ];
