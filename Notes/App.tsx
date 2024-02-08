@@ -8,9 +8,10 @@ import { Storage } from './src/screens/Storage';
 import { Photo } from './src/screens/Photo';
 import { Notification } from './src/screens/Notification';
 import { Location } from './src/screens/Location';
-
+import {enableLatestRenderer} from 'react-native-maps';
 const Drawer = createDrawerNavigator();
- const App = () => {
+const App = () => {
+  enableLatestRenderer();
   return (
   
     <GestureHandlerRootView style={{flex: 1}}>

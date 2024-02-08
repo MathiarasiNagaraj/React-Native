@@ -1,62 +1,123 @@
-import React, { useState } from 'react'
-import { PermissionsAndroid, Text, View } from 'react-native'
+import React, {useState} from 'react';
+import {
+  Dimensions,
+  PermissionsAndroid,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 export const Location = () => {
-    const [location, setLocation] = useState(false);
-    const getLocation = () => {
-        const result = requestLocationPermission();
-        result.then(res => {
-          console.log('res is:', res);
-          if (res) {
-            Geolocation.getCurrentPosition(
-              position => {
-                console.log(position);
-                setLocation(position);
-              },
-              error => {
-                // See error code charts below.
-                console.log(error.code, error.message);
-                setLocation(false);
-              },
-              {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-            );
-          }
-        });
-        console.log(location);
-      };
-    const requestLocationPermission = async () => {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-            {
-              title: 'Geolocation Permission',
-              message: 'Can we access your location?',
-              buttonNeutral: 'Ask Me Later',
-              buttonNegative: 'Cancel',
-              buttonPositive: 'OK',
-            },
-          );
-          console.log('granted', granted);
-          if (granted === 'granted') {
-            console.log('You can use Geolocation');
-            return true;
-          } else {
-            console.log('You cannot use Geolocation');
-            return false;
-          }
-        } catch (err) {
-          return false;
-        }
-      };
+  const [location, setLocation] = useState(false);
+  const getLocation = () => {
+    const result = requestLocationPermission();
+    result.then(res => {
+      console.log('res is:', res);
+      if (res) {
+        Geolocation.getCurrentPosition(
+          position => {
+            console.log(position);
+            setLocation(position);
+          },
+          error => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+            setLocation(false);
+          },
+          {enableHighAccuracy: false, timeout: 15000, maximumAge: 10000},
+        );
+      }
+    });
+    console.log(location);
+  };
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Geolocation Permission',
+          message: 'Can we access your location?',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      console.log('granted', granted);
+      if (granted === 'granted') {
+        console.log('You can use Geolocation');
+        return true;
+      } else {
+        console.log('You cannot use Geolocation');
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  };
   return (
     <View>
-          <Text> Hi</Text>
-          <TouchableOpacity onPress={getLocation}>
-              <Text>Click Me</Text>
+      <View style={styles.container}>
+        <MapView
+          // remove if not using Google Maps
+          style={styles.map}
+          provider={PROVIDER_GOOGLE}
+          rotateEnabled
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.095,
+            longitudeDelta: 0.0921,
+          }}></MapView>
+      </View>
+
+      <TouchableOpacity onPress={getLocation} style={styles.btn}>
+        <Text style={styles.txt}>Click Me</Text>
           </TouchableOpacity>
-          <Text>Latitude: {location ? location.coords.latitude : null}</Text>
-      <Text>Longitude: {location ? location.coords.longitude : null}</Text>
+          <View style={styles.innerWrapper}>
+      <Text style={styles.text}>Latitude: {location ? location.coords.latitude : null}</Text>
+              <Text style={styles.text}>Longitude: {location ? location.coords.longitude : null}</Text>
+              </View>
     </View>
-  )
-}
+  );
+};
+const styles = StyleSheet.create({
+  container: {
+    height: 500,
+    },
+    text: {
+        fontSize: 23,
+        color:'black'
+    },
+    innerWrapper: {
+        padding:30,
+        backgroundColor: 'white',
+        height: 200,
+        justifyContent: 'space-evenly',
+        alignItems:'flex-start'
+        
+    },
+  btn: {
+position:'relative',
+    backgroundColor: 'lightblue',
+    height: 50,
+ width: 200,
+      borderRadius: 30,
+    textAlign:'center'
+  },
+    txt: {
+        position: 'absolute',
+        top: '13%',
+        left:'30%',
+        color: 'blue',
+        fontSize: 20,
+    
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+    height: 400,
+  },
+});
