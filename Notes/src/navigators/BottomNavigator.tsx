@@ -12,7 +12,7 @@ export const BottomNavigator = () => {
         name="Fade"
         component={Fade}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Fade ',
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
@@ -20,15 +20,15 @@ export const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Rotation"
-        component={Rotation}
+        component={PanHandler}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Pan responder',
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="PanHandler"
         component={PanHandler}
         options={{
@@ -37,7 +37,7 @@ export const BottomNavigator = () => {
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
