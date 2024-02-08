@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {
   Dimensions,
   PermissionsAndroid,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -10,7 +11,9 @@ import Geolocation from 'react-native-geolocation-service';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 export const Location = () => {
-  const [location, setLocation] = useState(false);
+    const [location, setLocation] = useState(false);
+    const [latitude, setLatitude] = useState(37.78825);
+    const [longitude, setLongitude] = useState(80.2455033);
   const getLocation = () => {
     const result = requestLocationPermission();
     result.then(res => {
@@ -18,15 +21,17 @@ export const Location = () => {
       if (res) {
         Geolocation.getCurrentPosition(
           position => {
-            console.log(position);
-            setLocation(position);
+       
+                setLocation(position);
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude)
           },
           error => {
             // See error code charts below.
             console.log(error.code, error.message);
             setLocation(false);
           },
-          {enableHighAccuracy: false, timeout: 15000, maximumAge: 10000},
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
         );
       }
     });
@@ -56,8 +61,9 @@ export const Location = () => {
       return false;
     }
   };
+    console.log(latitude,longitude)
   return (
-    <View>
+    <ScrollView>
       <View style={styles.container}>
         <MapView
           // remove if not using Google Maps
@@ -65,8 +71,8 @@ export const Location = () => {
           provider={PROVIDER_GOOGLE}
           rotateEnabled
           initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: latitude,
+            longitude: longitude,
             latitudeDelta: 0.095,
             longitudeDelta: 0.0921,
           }}></MapView>
@@ -79,7 +85,7 @@ export const Location = () => {
       <Text style={styles.text}>Latitude: {location ? location.coords.latitude : null}</Text>
               <Text style={styles.text}>Longitude: {location ? location.coords.longitude : null}</Text>
               </View>
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({

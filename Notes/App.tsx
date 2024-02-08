@@ -21,7 +21,7 @@ const App = () => {
           <Drawer.Screen name='Location' component={Location} />
           <Drawer.Screen name='Notification' component={Notification} />
           <Drawer.Screen name='Photo' component={Photo} />
-          <Drawer.Screen name='Storage' component={Storage}/>
+          {/* <Drawer.Screen name='Storage' component={Storage}/> */}
         </Drawer.Navigator>
       </NavigationContainer>
 </GestureHandlerRootView>

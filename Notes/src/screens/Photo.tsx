@@ -87,23 +87,8 @@ export const Photo = () => {
             />
           ) : null}
 
-          {/* <View style={styles.backButton}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'rgba(0,0,0,0.2)',
-                padding: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 10,
-                borderWidth: 2,
-                borderColor: '#fff',
-                width: 100,
-              }}
-              onPress={() => setShowCamera(true)}>
-              <Text style={{color: 'white', fontWeight: '500'}}>Back</Text>
-            </TouchableOpacity>
-          </View> */}
-          <View style={styles.buttonContainer}>
+       
+{imageSource !== '' ? (  <View style={styles.buttonContainer}>
             <View style={styles.buttons}>
               <TouchableOpacity
                 style={{
@@ -118,23 +103,35 @@ export const Photo = () => {
                 onPress={() => setShowCamera(true)}>
                 <Text style={{color: 'white', fontWeight: '500'}}>Retake</Text>
               </TouchableOpacity>
-              <TouchableOpacity
+                              <TouchableOpacity
+                                  style={{
+                                      backgroundColor: '#77c3ec',
+                                      padding: 10,
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      borderRadius: 10,
+                                      borderWidth: 2,
+                                      borderColor: 'white',
+                                  }}
+                                  onPress={() => setShowCamera(true)}>
+                                  <Text style={{ color: 'white', fontWeight: '500' }}>
+                                      Use Photo
+                                  </Text>
+                              </TouchableOpacity>
+            </View>
+          </View>) :  <TouchableOpacity
                 style={{
-                  backgroundColor: '#77c3ec',
+                  backgroundColor: 'green',
                   padding: 10,
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderRadius: 10,
                   borderWidth: 2,
-                  borderColor: 'white',
+                  borderColor: 'green',
                 }}
                 onPress={() => setShowCamera(true)}>
-                <Text style={{color: 'white', fontWeight: '500'}}>
-                  Use Photo
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+                <Text style={{color: 'white', fontWeight: '500'}}>Take  photo</Text>
+              </TouchableOpacity>}
         </>
       )}
     </View>
